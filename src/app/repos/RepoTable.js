@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   DataTable,
@@ -14,6 +16,11 @@ import {
 } from '@carbon/react';
 
 const RepoTable = ({ rows, headers }) => {
+  const getRowDescription = (rowId) => {
+    const row = rows.find(({ id }) => id === rowId);
+    return row ? row.description : '';
+  };
+
   return (
     <DataTable
       rows={rows}
@@ -49,7 +56,7 @@ const RepoTable = ({ rows, headers }) => {
                     ))}
                   </TableExpandRow>
                   <TableExpandedRow colSpan={headers.length + 1}>
-                    <p>Row description</p>
+                    <p>{getRowDescription(row.id)}</p>
                   </TableExpandedRow>
                 </React.Fragment>
               ))}
